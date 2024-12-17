@@ -17,7 +17,6 @@ from core.apps.users.exceptions.main import (
     UserNotVerifiedError,
 )
 from core.apps.users.services.login.base import (
-    BaseCommandAddPacketToUserBySessionKeyService,
     BaseCommandAuthenticateUserService,
     BaseCommandVerificateUserService,
 )
@@ -56,9 +55,6 @@ class AuthenticatePageCommand(BaseCommands):
 class AuthenticatePageCommandHandler(CommandHandler[AuthenticatePageCommand, str]):
     command_verificate_password_service: BaseCommandVerificateUserService
     command_authenticate_user_service: BaseCommandAuthenticateUserService
-    command_add_packet_to_user_by_session_key: (
-        BaseCommandAddPacketToUserBySessionKeyService
-    )
 
     def handle(
         self,

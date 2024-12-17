@@ -2,9 +2,13 @@ from functools import lru_cache
 
 from punq import Container
 
+from core.apps.users.services.login.main import (
+    ORMCommandAuthenticateUserService,
+    ORMCommandVerificateUserService,
+)
 from core.apps.users.use_cases.login import (
-    LoginPageCommand,
-    LoginPageCommandHandler,
+    AuthenticatePageCommand,
+    AuthenticatePageCommandHandler,
 )
 from core.infrastructure.mediator.mediator import Mediator
 
@@ -20,20 +24,23 @@ def _initialize_container() -> Container:
     # init services
 
     # Handlers
-    container.register(LoginPageCommandHandler)
+    container.register(AuthenticatePageCommandHandler)
 
     def init_mediator() -> Mediator:
         mediator = Mediator()
 
         # command handlers
         # user app
-        configure_login_page_handler = LoginPageCommandHandler()
+        configure_authentice_handler = AuthenticatePageCommandHandler(
+            command_verificate_password_service=ORMCommandVerificateUserService(),
+            command_authenticate_user_service=ORMCommandAuthenticateUserService(),
+        )
 
         # commands
         # user app
         mediator.register_command(
-            LoginPageCommand,
-            [configure_login_page_handler],
+            AuthenticatePageCommand,
+            [configure_authentice_handler],
         )
 
         return mediator
