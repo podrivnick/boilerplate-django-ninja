@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "django_extensions",
     "ninja",
-    "core.apps.main.apps.MainConfig",
     "core.apps.users.apps.UsersConfig",
     "core.apps.common.apps.CommonConfig",
 ]
@@ -137,7 +136,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = "static/"
+STATIC_URL = "staticfiles/"
 
 STATIC_ROOT = "staticfiles"
 # Static files (CSS, JavaScript, Images)

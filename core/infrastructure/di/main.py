@@ -1,23 +1,10 @@
 from functools import lru_cache
 
-from punq import (
-    Container,
-    Scope,
-)
+from punq import Container
 
-from core.apps.main.repositories.main import ORMQueryProductRepository
-from core.apps.main.services.main.base import BaseProductsService
-from core.apps.main.services.main.main import (
-    ORMCategoriesService,
-    ORMProductsService,
-)
-from core.apps.main.services.universal import (
-    ORMAllProductsService,
-    ORMFavoriteProductsIdsService,
-)
-from core.apps.main.use_cases.main import (
-    MainPageCommand,
-    MainPageCommandHandler,
+from core.apps.users.use_cases.login import (
+    LoginPageCommand,
+    LoginPageCommandHandler,
 )
 from core.infrastructure.mediator.mediator import Mediator
 
@@ -31,39 +18,22 @@ def _initialize_container() -> Container:
     container = Container()
 
     # init services
-    def init_product_service() -> BaseProductsService:
-        return ORMProductsService(
-            query_product_repository=ORMQueryProductRepository(),
-        )
-
-    container.register(
-        BaseProductsService,
-        factory=init_product_service,
-        scope=Scope.singleton,
-    )
 
     # Handlers
-    container.register(MainPageCommandHandler)
+    container.register(LoginPageCommandHandler)
 
     def init_mediator() -> Mediator:
         mediator = Mediator()
 
         # command handlers
-        # main app
-        configure_main_page_handler = MainPageCommandHandler(
-            favorite_products_service_ids=ORMFavoriteProductsIdsService(),
-            get_all_products_service=ORMAllProductsService(),
-            categories_service=ORMCategoriesService(),
-            products_service=container.resolve(
-                BaseProductsService,
-            ),
-        )
+        # user app
+        configure_login_page_handler = LoginPageCommandHandler()
 
         # commands
-        # main app
+        # user app
         mediator.register_command(
-            MainPageCommand,
-            [configure_main_page_handler],
+            LoginPageCommand,
+            [configure_login_page_handler],
         )
 
         return mediator
