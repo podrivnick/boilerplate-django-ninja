@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.idea
+.env
+.ruff_cache
+.pytest_cache
+
+media/
+myenv/
+
+frontend/media/
+staticfiles/
+staticfiles
