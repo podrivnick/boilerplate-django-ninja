@@ -23,6 +23,7 @@ typing-extensions = "4.12.2"
 django-ninja = "^1.3.0"
 punq = "^0.7.0"
 whitenoise = "^6.8.2"
+python-telegram-bot = "^21.9"
 
 
 [tool.poetry.group.dev.dependencies]

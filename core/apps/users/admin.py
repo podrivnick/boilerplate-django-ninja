@@ -5,7 +5,7 @@ from .models import User
 
 
 @admin.register(User)
-class userAdministration(UserAdmin):
+class UserAdministration(UserAdmin):
     search_fields = ["username", "email", "phone"]
     list_filter = ["is_active", "is_superuser"]
     list_display = [

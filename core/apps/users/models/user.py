@@ -34,6 +34,7 @@ class User(AbstractUser):
         related_name="custom_user_permissions",
         blank=True,
     )
+    telegram_id = models.CharField(max_length=255, unique=True, blank=True, null=True)
 
     class Meta:
         db_table = "user"

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "django_extensions",
     "ninja",
+    "core.apps.telegram_auth.apps.TelegramAuthConfig",
     "core.apps.users.apps.UsersConfig",
     "core.apps.common.apps.CommonConfig",
 ]
